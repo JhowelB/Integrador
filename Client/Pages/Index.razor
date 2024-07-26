@@ -1,0 +1,99 @@
+﻿@page "/index"
+@layout LoginLayout
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <a class="navbar-brand" href="/">Multitrabajos</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/mostrar-categorias">Buscas Trabajo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/loginempresa"> Registra tu Empresa</a>
+            </li>
+            <li class="nav-item">
+                <NavLink class="nav-link btn btn-primary" href="/login" style="background-color: #007bff; color: #fff;">Ingresar</NavLink>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row justify-content-center text-center">
+        <!-- Texto de bienvenida -->
+        <div class="col-12 mb-4">
+            <h3 class="display-4 font-weight-bold">Bienvenido a nuestra aplicación</h3>
+            <p class="lead">Seleccione una opción del menú para continuar.</p>
+        </div>
+
+        <!-- Columna de los botones y texto adicional -->
+        <div class="col-md-4 d-flex flex-column align-items-center">
+            <!-- Texto adicional -->
+            <p class="text-center mb-4 font-italic">Esta es la oportunidad que necesitas para encontrar el trabajo de tus sueños</p>
+
+            <!-- Botones verticales -->
+            <a class="btn btn-primary btn-lg btn-block mb-3" href="/loginempresa">Registra tu Empresa</a>
+            <a class="btn btn-secondary btn-lg btn-block" href="/mostrar-categorias">Buscas Trabajo</a>
+        </div>
+
+        <!-- Imagen -->
+        <div class="col-md-8 text-center mt-4">
+            <img src="imagenes/Postulate.jpeg" alt="Postulate" class="img-fluid shadow-lg rounded" style="max-width: 100%; height: auto;" />
+        </div>
+    </div>
+</div>
+
+<style>
+    .navbar {
+        background-color: #f8f9fa;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 1.1rem;
+    }
+
+    .container {
+        background-color: #f0f2f5;
+        padding: 30px;
+        border-radius: 8px;
+    }
+
+    .display-4 {
+        color: #333;
+    }
+
+    .font-weight-bold {
+        font-weight: 700;
+    }
+
+    .lead {
+        font-size: 1.25rem;
+        color: #666;
+    }
+
+    .font-italic {
+        font-style: italic;
+        color: #444;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border: none;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+</style>

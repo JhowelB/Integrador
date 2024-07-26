@@ -1,0 +1,53 @@
+﻿@page "/ListarEmpresas"
+<h3>Listar Empresas</h3>
+<div class="container mb-3">
+    <!-- Botón para ir a la ruta Agregar Empresa -->
+    <a class="btn btn-primary" href="/AgregarEmpresa">Agregar una Empresa</a>
+</div>
+
+@if (ViewModel.Empresas != null)
+{
+    <div class="container">
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>IdEmpresa</th>
+                    <th>Nombre Empresa</th>
+                    <th>Usuario</th>
+                    <th>Clave</th>
+                    <th>RUC</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Frase Secreta</th>
+                    <th>Número de Trabajadores</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewModel.Empresas)
+                {
+                    <tr>
+                        <td>@item.IdEmpresa</td>
+                        <td>@item.NombreEmpresa</td>
+                        <td>@item.Usuario</td>
+                        <td>@item.Clave</td>
+                        <td>@item.RUC</td>
+                        <td>@item.Direccion</td>
+                        <td>@item.Telefono</td>
+                        <td>@item.Correo</td>
+                        <td>@item.FraseSecreta</td>
+                        <td>@item.NumeroTrabajadores</td>
+                        <td>@item.Estado</td>
+                        <td>
+                            <!-- Botones de acción -->
+                            <a class="btn btn-warning btn-sm" href="@($"/ActualizarEmpresa/{item.IdEmpresa}")">Editar</a>
+                            <button class="btn btn-danger btn-sm" @onclick="() => DeactivateEmpresa(item.IdEmpresa)">Eliminar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

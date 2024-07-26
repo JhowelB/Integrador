@@ -1,0 +1,84 @@
+﻿@page "/Usuarios"
+@using Integrador.Shared.Entities
+@using Integrador.Shared.ViewModels
+
+@inject NavigationManager Navigation
+
+<h3>Registrar Usuario</h3>
+
+<EditForm Model="@ViewModel.UserToRegistry" OnValidSubmit="@Save">
+    <DataAnnotationsValidator />
+    <ValidationSummary class="text-danger" />
+
+    <div class="form-group">
+        <label>Nombres</label>
+        <InputText class="form-control" @bind-Value="ViewModel.UserToRegistry.Nombres" />
+        <ValidationMessage For="() => ViewModel.UserToRegistry.Nombres" />
+    </div>
+    <div class="form-group">
+        <label>Apellidos</label>
+        <InputText class="form-control" @bind-Value="ViewModel.UserToRegistry.Apellidos" />
+        <ValidationMessage For="() => ViewModel.UserToRegistry.Apellidos" />
+    </div>
+    <div class="form-group">
+        <label>Cédula</label>
+        <InputNumber class="form-control" @bind-Value="ViewModel.UserToRegistry.Cedula" />
+        <ValidationMessage For="() => ViewModel.UserToRegistry.Cedula" />
+    </div>
+    <div class="form-group">
+        <label>Teléfono</label>
+        <InputNumber class="form-control" @bind-Value="ViewModel.UserToRegistry.Telefono" />
+        <ValidationMessage For="() => ViewModel.UserToRegistry.Telefono" />
+    </div>
+    <div class="form-group">
+        <label>Correo</label>
+        <InputText class="form-control" @bind-Value="ViewModel.UserToRegistry.Correo" type="email" />
+        <ValidationMessage For="() => ViewModel.UserToRegistry.Correo" />
+    </div>
+    <div class="form-group">
+        <label>Clave</label>
+        <InputText class="form-control" @bind-Value="ViewModel.UserToRegistry.Clave" type="password" />
+        <ValidationMessage For="() => ViewModel.UserToRegistry.Clave" />
+    </div>
+    <div class="form-group">
+        <label>Rol</label>
+        <InputText class="form-control" @bind-Value="ViewModel.UserToRegistry.Rol" />
+        <ValidationMessage For="() => ViewModel.UserToRegistry.Rol" />
+    </div>
+    <div class="form-group">
+        <label>Fecha de Creación</label>
+        <InputDate class="form-control" @bind-Value="ViewModel.UserToRegistry.FechaCreacion" />
+        <ValidationMessage For="() => ViewModel.UserToRegistry.FechaCreacion" />
+    </div>
+    <div class="form-group">
+        <label>Estado</label>
+        <InputText class="form-control" @bind-Value="ViewModel.UserToRegistry.Estado" />
+        <ValidationMessage For="() => ViewModel.UserToRegistry.Estado" />
+    </div>
+    <div class="form-group">
+        <label>Estudios</label>
+        <InputText class="form-control" @bind-Value="ViewModel.UserToRegistry.Estudios" />
+        <ValidationMessage For="() => ViewModel.UserToRegistry.Estudios" />
+    </div>
+    <div class="form-group">
+        <label>Edad</label>
+        <InputNumber class="form-control" @bind-Value="ViewModel.UserToRegistry.Edad" />
+        <ValidationMessage For="() => ViewModel.UserToRegistry.Edad" />
+    </div>
+    <div class="form-group">
+        <label>Idiomas</label>
+        <InputText class="form-control" @bind-Value="ViewModel.UserToRegistry.Idiomas" />
+        <ValidationMessage For="() => ViewModel.UserToRegistry.Idiomas" />
+    </div>
+    <div class="form-group">
+        <label>Experiencia</label>
+        <InputText class="form-control" @bind-Value="ViewModel.UserToRegistry.Experiencia" />
+        <ValidationMessage For="() => ViewModel.UserToRegistry.Experiencia" />
+    </div>
+    <div class="form-group">
+        <label>Habilidades</label>
+        <InputText class="form-control" @bind-Value="ViewModel.UserToRegistry.Habilidades" />
+        <ValidationMessage For="() => ViewModel.UserToRegistry.Habilidades" />
+    </div>
+    <button class="btn btn-primary" type="submit">Guardar</button>
+</EditForm>

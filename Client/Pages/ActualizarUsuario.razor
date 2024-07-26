@@ -1,0 +1,132 @@
+﻿@page "/ActualizarUsuario/{UserId:int}"
+@using Integrador.Shared.Entities
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Actualizar Usuario</h3>
+
+@if (user == null)
+{
+    <p>Cargando datos del usuario...</p>
+}
+else
+{
+    <EditForm Model="user" OnValidSubmit="Save">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label>Nombres</label>
+            <InputText class="form-control" @bind-Value="user.Nombres" />
+        </div>
+        <div class="form-group">
+            <label>Apellidos</label>
+            <InputText class="form-control" @bind-Value="user.Apellidos" />
+        </div>
+        <div class="form-group">
+            <label>Cédula</label>
+            <InputNumber class="form-control" @bind-Value="user.Cedula" />
+        </div>
+        <div class="form-group">
+            <label>Teléfono</label>
+            <InputNumber class="form-control" @bind-Value="user.Telefono" />
+        </div>
+        <div class="form-group">
+            <label>Correo</label>
+            <InputText class="form-control" @bind-Value="user.Correo" type="email" />
+        </div>
+        <div class="form-group">
+            <label>Clave</label>
+            <InputText class="form-control" @bind-Value="user.Clave" type="password" />
+        </div>
+        <div class="form-group">
+            <label>Rol</label>
+            <InputText class="form-control" @bind-Value="user.Rol" />
+        </div>
+        <div class="form-group">
+            <label>Fecha de Creación</label>
+            <InputDate class="form-control" @bind-Value="user.FechaCreacion" />
+        </div>
+        <div class="form-group">
+            <label>Estado</label>
+            <InputText class="form-control" @bind-Value="user.Estado" />
+        </div>
+        <div class="form-group">
+            <label>Estudios</label>
+            <InputText class="form-control" @bind-Value="user.Estudios" />
+        </div>
+        <div class="form-group">
+            <label>Edad</label>
+            <InputNumber class="form-control" @bind-Value="user.Edad" />
+        </div>
+        <div class="form-group">
+            <label>Idiomas</label>
+            <InputText class="form-control" @bind-Value="user.Idiomas" />
+        </div>
+        <div class="form-group">
+            <label>Experiencia</label>
+            <InputText class="form-control" @bind-Value="user.Experiencia" />
+        </div>
+        <div class="form-group">
+            <label>Habilidades</label>
+            <InputText class="form-control" @bind-Value="user.Habilidades" />
+        </div>
+        <button class="btn btn-primary" type="submit">Guardar</button>
+
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="alert alert-danger mt-3">
+                @errorMessage
+            </div>
+        }
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public int UserId { get; set; }
+
+    private Usuario user;
+    private string errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            user = await Http.GetFromJsonAsync<Usuario>($"api/Users/{UserId}");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Error al cargar los datos del usuario: " + ex.Message;
+        }
+    }
+
+    private async Task Save()
+    {
+        if (user == null)
+        {
+            errorMessage = "No se puede guardar un usuario nulo.";
+            return;
+        }
+
+        try
+        {
+            var response = await Http.PutAsJsonAsync($"api/Users/Update/{user.IdUsuario}", user);
+
+            if (response.IsSuccessStatusCode)
+            {
+                NavigationManager.NavigateTo("/Usuarios", true);
+            }
+            else
+            {
+                errorMessage = "Error al actualizar el usuario. " + await response.Content.ReadAsStringAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Error al guardar el usuario: " + ex.Message;
+        }
+    }
+}
+
+

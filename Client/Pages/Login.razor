@@ -1,0 +1,62 @@
+﻿@page "/login"
+@using Integrador.Shared.Entities
+@using Integrador.Shared.ViewModels
+@layout LoginLayout
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card p-4 shadow-lg" style="width: 20rem;">
+        <div class="card-body">
+            <h3 class="card-title text-center mb-4">Login</h3>
+
+            <EditForm Model="loginModel" OnValidSubmit="HandleLogin">
+                <DataAnnotationsValidator />
+                <ValidationSummary class="text-danger" />
+
+                @if (!string.IsNullOrEmpty(loginError))
+                {
+                    <div class="alert alert-danger">@loginError</div>
+                }
+
+                <div class="form-group">
+                    <label for="correo">Correo:</label>
+                    <InputText id="correo" class="form-control" @bind-Value="loginModel.Correo" />
+                    <ValidationMessage For="() => loginModel.Correo" />
+                </div>
+                <div class="form-group">
+                    <label for="clave">Clave:</label>
+                    <InputText id="clave" type="password" class="form-control" @bind-Value="loginModel.Clave" />
+                    <ValidationMessage For="() => loginModel.Clave" />
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-3">Login</button>
+            </EditForm>
+            <div class="text-center mt-3">
+                <p>No tienes una cuenta?</p>
+                <a class="btn btn-secondary" href="/Usuarios">Registrar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private LoginModel loginModel = new LoginModel();
+    private string loginError;
+
+    private async Task HandleLogin()
+    {
+        loginError = string.Empty;
+        var response = await Http.PostAsJsonAsync("api/Auth/Login", loginModel);
+        if (response.IsSuccessStatusCode)
+        {
+            var user = await response.Content.ReadFromJsonAsync<Usuario>();
+            // Guardar los datos del usuario autenticado o redirigir a otra página
+            Navigation.NavigateTo("/Listarsuarios"); // Redirige a la página principal
+        }
+        else
+        {
+            // Manejar error de autenticación
+            loginError = "Correo o clave incorrecta.";
+        }
+    }
+}

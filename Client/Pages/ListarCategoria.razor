@@ -1,0 +1,39 @@
+﻿@page "/ListarCategorias"
+<h3>Listar Categorías</h3>
+<div class="container mb-3">
+    <!-- Botón para ir a la ruta Agregar Categoría -->
+    <a class="btn btn-primary" href="/AgregarCategoria">Agregar una Categoría</a>
+</div>
+
+@if (ViewModel.Categorias != null)
+{
+    <div class="container">
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>IdCategoria</th>
+                    <th>Nombre</th>
+                    <th>Fecha Creación</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewModel.Categorias)
+                {
+                    <tr>
+                        <td>@item.IdCategoria</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.FechaCreacion</td>
+                        <td>@item.Estado</td>
+                        <td>
+                            <!-- Botones de acción -->
+                            <a class="btn btn-warning btn-sm" href="@($"/ActualizarCategoria/{item.IdCategoria}")">Editar</a>
+                            <button class="btn btn-danger btn-sm" @onclick="() => DeactivateCategoria(item.IdCategoria)">Eliminar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
